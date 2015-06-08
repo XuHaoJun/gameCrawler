@@ -1,0 +1,14 @@
+{
+  "name": "gameCrawler",
+  "version": "0.0.1",
+  "dependencies": {
+    "crawler": "git+https://github.com/XuHaoJun/node-crawler.git",
+    "jsonfile": "^2.0.0",
+    "lodash": "^3.9.0"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "XuHaoJun",
+  "license": "ISC",
+  "description": "Just a little game."
+}
