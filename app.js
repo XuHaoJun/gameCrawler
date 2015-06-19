@@ -27,6 +27,13 @@ function getACGNames($) {
   return names;
 }
 
+function getDescription($) {
+  $('script').remove();
+  $('#BH-master > div.BH-lbox.ACG-mster_box6 > .wikiContent table').remove();
+  var desc = $('#BH-master > div.BH-lbox.ACG-mster_box6 > .wikiContent').text() || '';
+  return desc;
+}
+
 function getAnime(error, result, $) {
   if (error) {
     console.log(error);
@@ -37,6 +44,7 @@ function getAnime(error, result, $) {
     // TODO throw error no id page!.
     return;
   }
+  var desc = getDescription($);
   var anime = {
     id: id,                     // int
     acgType: 'anime',           // string
@@ -57,7 +65,8 @@ function getAnime(error, result, $) {
     company: '',                // string
     officalSite: '',            // string
     targetGroup: '',            // string
-    taiwanAgent: ''             // string
+    taiwanAgent: '',            // string
+    description: desc           // string
   };
   var names = getACGNames($);
   anime.nameTW = names.nameTW;
@@ -141,6 +150,7 @@ function getComic(error, result, $) {
     // TODO throw error no id page!.
     return;
   }
+  var desc = getDescription($);
   var comic = {
     id: id,                     // int
     acgType: 'comic',           // string
@@ -156,7 +166,8 @@ function getComic(error, result, $) {
     company: '',                // string
     officalSite: '',            // string
     targetGroup: '',            // string
-    taiwanAgent: ''             // string
+    taiwanAgent: '',            // string
+    description: desc           // string
   };
   var names = getACGNames($);
   comic.nameTW = names.nameTW;
@@ -225,6 +236,7 @@ function getNovel(error, result, $) {
     // TODO throw error no id page!.
     return;
   }
+  var desc = getDescription($);
   var novel = {
     id: id,                     // int
     acgType: 'novel',           // string
@@ -241,7 +253,8 @@ function getNovel(error, result, $) {
     publisher: '',              // string
     officalSite: '',            // string
     targetGroup: '',            // string
-    taiwanAgent: ''             // string
+    taiwanAgent: '',            // string
+    description: desc           // string
   };
   var names = getACGNames($);
   novel.nameTW = names.nameTW;
@@ -313,6 +326,7 @@ function getPC(error, result, $) {
     // TODO throw error no id page!.
     return;
   }
+  var desc = getDescription($);
   var pc = {
     id: id,                     // int
     acgType: 'PC',              // string
@@ -328,7 +342,8 @@ function getPC(error, result, $) {
     productCompany: '',         // string
     dirturbuteCompany: '',      // string
     agent: '',                  // string
-    officalSite: ''             // string
+    officalSite: '',            // string
+    description: desc           // string
   };
   var names = getACGNames($);
   pc.nameTW = names.nameTW;
@@ -425,6 +440,7 @@ function getOLG(error, result, $) {
     // TODO throw error no id page!.
     return;
   }
+  var desc = getDescription($);
   var olg = {
     id: id,                     // int
     acgType: 'OLG',              // string
@@ -436,12 +452,13 @@ function getOLG(error, result, $) {
     numPlayer: '',              // string
     ceroRating: '',             // string
     priceType: '',              // string
-    closeBetaDate: '',           // date
+    closeBetaDate: '',          // date
     openBetaDate: '',           // date
     productCompany: '',         // string
     dirturbuteCompany: '',      // string
     agent: '',                  // string
-    officalSite: ''             // string
+    officalSite: '',            // string
+    description: desc           // string
   };
   var names = getACGNames($);
   olg.nameTW = names.nameTW;
@@ -517,6 +534,7 @@ function getFacebook(error, result, $) {
     // TODO throw error no id page!.
     return;
   }
+  var desc = getDescription($);
   var facebook = {
     id: id,                     // int
     acgType: 'facebook',        // string
@@ -531,7 +549,8 @@ function getFacebook(error, result, $) {
     productCompany: '',         // string
     dirturbuteCompany: '',      // string
     agent: '',                  // string
-    officalSite: ''             // string
+    officalSite: '',            // string
+    description: desc             // string
   };
   var names = getACGNames($);
   facebook.nameTW = names.nameTW;
@@ -596,6 +615,7 @@ function getAndroid(error, result, $) {
     // TODO throw error no id page!.
     return;
   }
+  var desc = getDescription($);
   var android = {
     id: id,                     // int
     acgType: 'android',         // string
@@ -610,7 +630,8 @@ function getAndroid(error, result, $) {
     productCompany: '',         // string
     dirturbuteCompany: '',      // string
     agent: '',                  // string
-    storeSite: ''               // string
+    storeSite: '',              // string
+    description: desc           // string
   };
   var names = getACGNames($);
   android.nameTW = names.nameTW;
@@ -783,7 +804,7 @@ function main() {
   var c = null;
   for(i=0; i<platforms.length; i++) {
     c = new Crawler({
-      maxConnections: 4,
+      maxConnections: 32,
       retries: null,
       onDrain: _handleDrain.bind({platform: platforms[i]})
     });
